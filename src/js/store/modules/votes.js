@@ -29,6 +29,20 @@ const defaultVotes = () => {
 	}
 }
 
+const average = (array) => {
+	if (array.length === 0) {
+		return 0
+	}
+
+	let sum = 0
+	for (const element in array) {
+		if (Number.isInteger(element)) {
+			sum += Number(element)
+		}
+	}
+	return sum / array.length
+}
+
 const state = defaultVotes()
 
 const mutations = {
@@ -109,12 +123,14 @@ const getters = {
 			const countYes = state.list.filter(vote => vote.voteOptionText === option.pollOptionText && vote.voteAnswer === 'yes').length
 			const countMaybe = state.list.filter(vote => vote.voteOptionText === option.pollOptionText && vote.voteAnswer === 'maybe').length
 			const countNo = state.list.filter(vote => vote.voteOptionText === option.pollOptionText && vote.voteAnswer === 'no').length
+			const consensAvg = average(state.list.filter(vote => vote.voteOptionTest === option.pollOptionText))
 			rank.push({
 				rank: 0,
 				pollOptionText: option.pollOptionText,
 				yes: countYes,
 				no: countNo,
-				maybe: countMaybe
+				maybe: countMaybe,
+				consens: consensAvg
 			})
 		})
 		rank = orderBy(rank, ['yes', 'maybe'], ['desc', 'desc'])

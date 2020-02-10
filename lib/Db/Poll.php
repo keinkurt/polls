@@ -53,6 +53,8 @@ use OCP\AppFramework\Db\Entity;
  * @method void setFullAnonymous(integer $value)
  * @method integer getAllowMaybe()
  * @method void setAllowMaybe(integer $value)
+ * @method integer getConsensVote()
+ * @method void setConsensVote(integer $value)
  * @method string getOptions()
  * @method void setOptions(string $value)
  * @method string getSettings()
@@ -99,6 +101,9 @@ class Poll extends Entity implements JsonSerializable {
 	/** @var int $allowMaybe */
 	protected $allowMaybe;
 
+	/** @var int $consensVote */
+	protected $consensVote;
+
 	/** @var string $options */
 	protected $options;
 
@@ -128,6 +133,7 @@ class Poll extends Entity implements JsonSerializable {
 			'anonymous' => intval($this->anonymous),
 			'fullAnonymous' => intval($this->fullAnonymous),
 			'allowMaybe' => intval($this->allowMaybe),
+			'consensVote' => intval($this->consensVote),
 			'options' => $this->options,
 			'settings' => $this->settings,
 			'voteLimit' => intval($this->voteLimit),

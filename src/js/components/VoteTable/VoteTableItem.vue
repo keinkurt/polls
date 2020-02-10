@@ -21,7 +21,12 @@
   -->
 
 <template>
-	<div class="vote-table-item" :class="[answer, { active: isActive}]">
+	<div v-if="poll.consensVote" class="vote-table-item" :class="[answer, { active: isActive}]">
+		<select class="input" @click="voteClick()" v-model="answer">
+			<option v-for="number of Array(11).keys()" :value="number">{{ number }}</option>
+		</select>
+	</div>
+	<div v-else class="vote-table-item" :class="[answer, { active: isActive}]">
 		<div class="icon" @click="voteClick()" />
 	</div>
 </template>
@@ -111,6 +116,9 @@ export default {
 			height: 40px;
 			background-size: 90%;
 			flex: 0 0 auto;
+		}
+		> .input {
+			width: 100%;
 		}
 
 		&.yes {

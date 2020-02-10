@@ -47,6 +47,10 @@
 				type="checkbox" class="checkbox">
 			<label for="allowMaybe" class="title"> {{ t('polls', 'Allow "maybe" vote') }} </label>
 
+			<input id="consensVote" v-model="pollConsensVote"
+				type="checkbox" class="checkbox">
+			<label for="consensVote" class="title"> {{ t('polls', 'Consens voting') }} </label>
+
 			<input id="anonymous" v-model="pollAnonymous"
 				type="checkbox" class="checkbox">
 			<label for="anonymous" class="title"> {{ t('polls', 'Anonymous poll') }} </label>
@@ -203,6 +207,15 @@ export default {
 			},
 			set(value) {
 				this.writeValue({ allowMaybe: value })
+			}
+		},
+
+		pollConsensVote: {
+			get() {
+				return this.poll.consensVote
+			},
+			set(value) {
+				this.writeValue({ consensVote: value })
 			}
 		},
 

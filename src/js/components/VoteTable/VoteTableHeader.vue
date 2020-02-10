@@ -42,10 +42,13 @@
 		</div>
 
 		<div class="counter">
-			<div class="yes">
+			<div v-if="poll.consensVote" class="consens">
+				<span> {{ averageVote }} </span>
+			</div>
+			<div v-else class="yes">
 				<span> {{ yesVotes }} </span>
 			</div>
-			<div v-if="poll.allowMaybe" class="maybe">
+			<div v-if="poll.allowMaybe && !poll.consensVote" class="maybe">
 				<span> {{ maybeVotes }} </span>
 			</div>
 		</div>
@@ -86,6 +89,13 @@ export default {
 			'votesRank',
 			'winnerCombo'
 		]),
+
+		averageVote() {
+			const pollOptionText = this.option.pollOptionText
+			return this.votesRank.find(rank => {
+				return rank.pollOptionText === pollOptionText
+			}).consens
+		},
 
 		yesVotes() {
 			const pollOptionText = this.option.pollOptionText

@@ -255,6 +255,7 @@ class PollController extends Controller {
 			$this->poll->setAnonymous(intval($poll['anonymous']));
 			$this->poll->setFullAnonymous(intval($poll['fullAnonymous']) * $this->poll->getAnonymous());
 			$this->poll->setAllowMaybe(intval($poll['allowMaybe']));
+			$this->poll->setConsensVote(intval($poll['consensVote']));
 			$this->poll->setVoteLimit(intval($poll['voteLimit']));
 			$this->poll->setSettings('');
 			$this->poll->setOptions('');
